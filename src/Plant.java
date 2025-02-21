@@ -1,4 +1,11 @@
-
+/**
+ * Filename: Plant.java
+ * Author: Nate Williams
+ * Editor: Abraham Montalvo
+ * Due Date: Feb 21, 2025
+ * 
+ * This is the Plant class that initializes instances of the Worker class and process Oranges
+ */
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -58,6 +65,11 @@ public class Plant implements Runnable {
                            " bottles, wasted " + totalWasted + " oranges");
     }
 
+    /**
+     * @param time - length of time we want to sleep the thread
+     * @param errMsg - error message thrown when we slepe the thread and it throws the InterruptedException
+     * @return void
+     */
     private static void delay(long time, String errMsg) {
         long sleepTime = Math.max(1, time);
         try {
@@ -88,6 +100,9 @@ public class Plant implements Runnable {
     }
 
     // Start all threads
+    /**
+     * Starts Plant class and Worker instances
+     */
     public void startPlant() {
         timeToWork = true;
         thread.start();
@@ -97,6 +112,9 @@ public class Plant implements Runnable {
     }
 
     // Stop all threads
+    /**
+     * Stops Plant and all Workers within
+     */
     public void stopPlant() {
         timeToWork = false;
         peeler.stopWorker();
@@ -104,6 +122,9 @@ public class Plant implements Runnable {
         bottler.stopWorker();
     }
 
+    /**
+     * Waits for Plant to stop and for all Workers to stop
+     */
     public void waitToStop() {
         try {
             thread.join();
@@ -116,6 +137,10 @@ public class Plant implements Runnable {
     }
 
     @Override
+    /**
+     * Runs the Plant class, checking queues for Oranges and allowing Workers to access their respective queues to perform operations on the Orange
+     * instances
+     */
     public void run() {
         System.out.print(Thread.currentThread().getName() + " Processing oranges");
         // Check if the queues have Oranges for each worker to process
@@ -138,22 +163,38 @@ public class Plant implements Runnable {
     }
 
     // Gets number of oranges generated
+    /**
+     * Used for calculating efficiency metrics
+     * @return Number of oranges generated over the simulation
+     */
     public int getProvidedOranges() {
         return orangesProvided;
     }
 
     // Gets number of oranges processed
+    /**
+     * Used for calculating efficiency metrics
+     * @return Number of oranges fully processed over the simulation
+     */
     public int getProcessedOranges() {
         orangesProcessed = bottled.size();
         return orangesProcessed;
     }
 
     // Gets number of full bottles of juice
+    /**
+     * Used for calculating efficiency metrics
+     * @return Number of bottles of orange juice generated over the simulation
+     */
     public int getBottles() {
         return orangesProcessed / ORANGES_PER_BOTTLE;
     }
 
     // Get number of oranges wasted
+    /**
+     * Used for calculating efficiency metrics
+     * @return Number of wasted oranges over the simulation
+     */
     public int getWaste() {
         return orangesProcessed % ORANGES_PER_BOTTLE;
     }

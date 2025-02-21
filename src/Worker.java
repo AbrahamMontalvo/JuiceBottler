@@ -1,3 +1,11 @@
+/**
+ * Filename: Worker.java
+ * Author: Abraham Montalvo
+ * Due Date: Feb 21, 2025
+ * 
+ * This is the Worker class initialized within the Plant class that processes Oranges.
+ */
+
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
