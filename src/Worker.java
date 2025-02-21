@@ -1,8 +1,9 @@
+
 /**
  * Filename: Worker.java
  * Author: Abraham Montalvo
  * Due Date: Feb 21, 2025
- * 
+ *
  * This is the Worker class initialized within the Plant class that processes Oranges.
  */
 
@@ -11,11 +12,12 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Worker implements Runnable {
-    // How long do we want to run the juice processing
 
+    // How long do we want to run the juice processing
     /**
      * @param time - length of time we want to sleep the thread
-     * @param errMsg - error message thrown when we slepe the thread and it throws the InterruptedException
+     * @param errMsg - error message thrown when we slepe the thread and it
+     * throws the InterruptedException
      * @return void
      */
     private static void delay(long time, String errMsg) {
@@ -35,7 +37,6 @@ public class Worker implements Runnable {
     private Queue<Orange> nextQueue;
     private int workNum;
 
-
     // Instantiate worker
     Worker(int threadNum, int workerNum, Queue<Orange> nxtQueue) {
         thread = new Thread(this, "Worker[" + threadNum + "]");
@@ -54,14 +55,15 @@ public class Worker implements Runnable {
 
     // Stop worker
     /**
-    * Method that stops the worker thread 
-    */
+     * Method that stops the worker thread
+     */
     public void stopWorker() {
         timeToWork = false;
     }
 
     /**
-     * Method that waits for the thread to stops after receiving the signal to stop
+     * Method that waits for the thread to stops after receiving the signal to
+     * stop
      */
     public void waitToStop() {
         try {
@@ -74,18 +76,20 @@ public class Worker implements Runnable {
     // Runs the thread itself, monitoring the timeToWork variable and processing Oranges if there are any unprocessed
     @Override
     /**
-     * Runs the thread itself, monitoring the timeToWork boolean, and taking Oranges from the queue, processing its next state, and then adding it * * to the next queue.
+     * Runs the thread itself, monitoring the timeToWork boolean, and taking
+     * Oranges from the queue, processing its next state, and then adding it * *
+     * to the next queue.
      */
     public void run() {
         System.out.print(Thread.currentThread().getName() + " Processing oranges");
         while (timeToWork) {
-            if(!providedOranges.isEmpty()){
+            if (!providedOranges.isEmpty()) {
                 Orange o = providedOranges.remove();
                 o.runProcess();
                 processedOranges.add(o);
                 System.out.print(".");
             }
-            if(!processedOranges.isEmpty()){
+            if (!processedOranges.isEmpty()) {
                 nextQueue.add(processedOranges.remove());
             }
         }

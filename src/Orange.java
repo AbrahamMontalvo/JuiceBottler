@@ -1,15 +1,18 @@
+
 /**
  * Filename: Orange.java
  * Author: Nate Williams
  * Due Date: Feb 21, 2025
- * 
+ *
  * This is our Orange class that is processed by the Plant and Worker classes.
  */
 
 public class Orange {
+
     // List all of the states and how long they take to complete
     /**
-     * Enumerates all the possible States of the Orange as well as how long they take to complete
+     * Enumerates all the possible States of the Orange as well as how long they
+     * take to complete
      */
     public enum State {
         Fetched(15), // Retrieve the orange (takes 15 ms)
@@ -65,7 +68,8 @@ public class Orange {
     }
 
     /**
-     * Make the Thread that is working on the Orange sleep until the Orange finishes its process
+     * Make the Thread that is working on the Orange sleep until the Orange
+     * finishes its process
      */
     private void doWork() {
         // Sleep for the amount of time necessary to do the work
